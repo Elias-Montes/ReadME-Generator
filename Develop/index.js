@@ -60,7 +60,13 @@ inquirer.prompt = ([
         message: 'What is your Email:',
     },
 
-]).then()
+]).then(response => {
+    writeToFile(response);
+});
+
+const askUser = () => {
+    return inquirer.prompt
+};
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
@@ -74,7 +80,10 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    askUser()
+    .then((answers) => writeToFile(`${answers.title}`, answers))
+};
 
 // Function call to initialize app
 init();

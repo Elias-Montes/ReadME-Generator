@@ -60,7 +60,7 @@ function generateMarkdown(data) {
 
   ## Questions:
 
-  - Github: ${data.github}/
+  - Github: ${data.github}
   - Email: ${data.email}
   `
   return markdown

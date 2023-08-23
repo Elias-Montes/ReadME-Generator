@@ -4,7 +4,7 @@ const fs = require('fs');
 const generateMarkdown = require('./generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
-inquirer.prompt = ([
+const questions = [
     {
         type: 'input',
         name: 'title',
@@ -60,30 +60,43 @@ inquirer.prompt = ([
         message: 'What is your Email:',
     },
 
-]).then(response => {
-    writeToFile(response);
-});
+];
 
-const askUser = () => {
-    return inquirer.prompt
-};
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    const markdownFile = generateMarkdown(data)
-    fs.writeFile(fileName, markdownFile, error =>{
+inquirer.prompt(questions)
+.then((data) => {
+    const markdown = generateMarkdown(data);
+    fs.writeFile(`${data.title}`, markdown, error =>{
         if (error){
             return console.log(error);
         }
-        console.log('Awesome! The ReadMe was created.')
-    });
-}
+        console.log('Awesome! The ReadME was created.')
+    })
+})
 
-// TODO: Create a function to initialize app
-function init() {
-    askUser()
-    .then((answers) => writeToFile(`${answers.title}`, answers))
-};
+// .then(response => {
+//     writeToFile(response);
+// });
 
-// Function call to initialize app
-init();
+// const askUser = () => {
+//     return inquirer.prompt
+// };
+
+// // TODO: Create a function to write README file
+// function writeToFile(fileName, data) {
+//     const markdownFile = generateMarkdown(data)
+//     fs.writeFile(fileName, markdownFile, error =>{
+//         if (error){
+//             return console.log(error);
+//         }
+//         console.log('Awesome! The ReadMe was created.')
+//     });
+// }
+
+// // TODO: Create a function to initialize app
+// function init() {
+//     askUser()
+//     .then((answers) => writeToFile(`${answers.title}`, answers))
+// };
+
+// // Function call to initialize app
+// init();
